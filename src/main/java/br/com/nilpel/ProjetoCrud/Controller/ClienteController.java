@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/cliente")
 public class ClienteController {
 
     @Autowired
@@ -33,20 +33,20 @@ public class ClienteController {
         return ResponseEntity.ok(clientes);
     }
 
-    @GetMapping("/buscar/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<ClienteResponse> buscarPorId(@PathVariable Long id) {
         return clienteService.buscarPorId(id)
                 .map(cliente -> ResponseEntity.ok(toResponse(cliente)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/atualizar/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<ClienteResponse> atualizar(@PathVariable Long id, @RequestBody ClienteRequest request) {
         Cliente salvo = clienteService.atualizar(id, request);
         return ResponseEntity.ok(toResponse(salvo));
     }
 
-    @DeleteMapping("/deletar/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         clienteService.deletar(id);
         return ResponseEntity.noContent().build();

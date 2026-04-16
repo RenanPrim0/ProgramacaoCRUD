@@ -1,16 +1,55 @@
 package br.com.nilpel.ProjetoCrud.Service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
+import java.util.List;
+import java.util.Optional;
 
-import br.com.nilpel.ProjetoCrud.dto.Cliente.ClienteAltRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import br.com.nilpel.ProjetoCrud.Model.Cliente;
+import br.com.nilpel.ProjetoCrud.Repository.ClienteRepository;
+import br.com.nilpel.ProjetoCrud.dto.Cliente.ClienteRequest;
 
 @Service
 public class ClienteService {
 
-    @PostMapping("/clientes") 
-    public void salvarCliente(ClienteAltRequest clienteAltRequest)
-    {
-        
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    public Cliente salvar(ClienteRequest request) {
+        Cliente cliente = new Cliente();
+        cliente.setNome(request.nome());
+        cliente.setEmail(request.email());
+        cliente.setTelefone(request.telefone());
+        cliente.setEndereco(request.endereco());
+        cliente.setCpf(request.cpf());
+        return clienteRepository.save(cliente);
+    }
+
+    public List<Cliente> listarTodos() {
+        return clienteRepository.findAll();
+    }
+
+    public Optional<Cliente> buscarPorId(Long id) {
+        return clienteRepository.findById(id);
+    }
+
+    public Cliente atualizar(Long id, ClienteRequest request) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado com id: " + id));
+
+        cliente.setNome(request.nome());
+        cliente.setEmail(request.email());
+        cliente.setTelefone(request.telefone());
+        cliente.setEndereco(request.endereco());
+        cliente.setCpf(request.cpf());
+
+        return clienteRepository.save(cliente);
+    }
+
+    public void deletar(Long id) {
+        if (!clienteRepository.existsById(id)) {
+            throw new RuntimeException("Cliente não encontrado com id: " + id);
+        }
+        clienteRepository.deleteById(id);
     }
 }

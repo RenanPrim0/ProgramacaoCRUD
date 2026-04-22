@@ -1,9 +1,9 @@
-package br.com.nilpel.ProjetoCrud.Controller;
+package br.com.nilpel.ProjetoCrud.controller;
 
-import br.com.nilpel.ProjetoCrud.Model.Moto;
-import br.com.nilpel.ProjetoCrud.Service.MotoService;
-import br.com.nilpel.ProjetoCrud.dto.Moto.MotoRequest;
-import br.com.nilpel.ProjetoCrud.dto.Moto.MotoResponse;
+import br.com.nilpel.ProjetoCrud.model.Moto;
+import br.com.nilpel.ProjetoCrud.service.MotoService;
+import br.com.nilpel.ProjetoCrud.dto.moto.MotoRequest;
+import br.com.nilpel.ProjetoCrud.dto.moto.MotoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

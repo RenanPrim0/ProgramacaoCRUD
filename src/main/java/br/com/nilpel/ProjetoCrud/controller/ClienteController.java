@@ -1,9 +1,9 @@
-package br.com.nilpel.ProjetoCrud.Controller;
+package br.com.nilpel.ProjetoCrud.controller;
 
-import br.com.nilpel.ProjetoCrud.Model.Cliente;
-import br.com.nilpel.ProjetoCrud.Service.ClienteService;
-import br.com.nilpel.ProjetoCrud.dto.Cliente.ClienteRequest;
-import br.com.nilpel.ProjetoCrud.dto.Cliente.ClienteResponse;
+import br.com.nilpel.ProjetoCrud.model.Cliente;
+import br.com.nilpel.ProjetoCrud.service.ClienteService;
+import br.com.nilpel.ProjetoCrud.dto.cliente.ClienteRequest;
+import br.com.nilpel.ProjetoCrud.dto.cliente.ClienteResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

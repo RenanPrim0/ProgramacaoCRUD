@@ -1,4 +1,4 @@
-package br.com.nilpel.ProjetoCrud.Model;
+package br.com.nilpel.ProjetoCrud.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,21 +9,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "crud_teste_cliente")
+@Table(name = "crud_teste_mecanico")
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente {
+public class Mecanico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String email;
     private String telefone;
-    private String endereco;
     private String cpf;
 }
-
-
-

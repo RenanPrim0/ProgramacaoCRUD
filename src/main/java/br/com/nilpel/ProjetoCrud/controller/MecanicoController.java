@@ -1,13 +1,13 @@
-package br.com.nilpel.ProjetoCrud.Controller;
+package br.com.nilpel.ProjetoCrud.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.nilpel.ProjetoCrud.Model.Mecanico;
-import br.com.nilpel.ProjetoCrud.Service.MecanicoService;
-import br.com.nilpel.ProjetoCrud.dto.Mecanico.MecanicoResponse;
-import br.com.nilpel.ProjetoCrud.dto.Mecanico.MecanicoResquest;
+import br.com.nilpel.ProjetoCrud.model.Mecanico;
+import br.com.nilpel.ProjetoCrud.service.MecanicoService;
+import br.com.nilpel.ProjetoCrud.dto.mecanico.MecanicoResponse;
+import br.com.nilpel.ProjetoCrud.dto.mecanico.MecanicoResquest;
 
 import java.util.List;
 

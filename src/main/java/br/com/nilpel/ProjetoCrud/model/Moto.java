@@ -1,4 +1,4 @@
-package br.com.nilpel.ProjetoCrud.Model;
+package br.com.nilpel.ProjetoCrud.model;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

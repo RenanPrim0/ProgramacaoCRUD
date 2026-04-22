@@ -1,8 +1,8 @@
-package br.com.nilpel.ProjetoCrud.Service;
+package br.com.nilpel.ProjetoCrud.service;
 
-import br.com.nilpel.ProjetoCrud.Model.Moto;
-import br.com.nilpel.ProjetoCrud.Repository.MotoRepository;
-import br.com.nilpel.ProjetoCrud.dto.Moto.MotoRequest;
+import br.com.nilpel.ProjetoCrud.model.Moto;
+import br.com.nilpel.ProjetoCrud.repository.MotoRepository;
+import br.com.nilpel.ProjetoCrud.dto.moto.MotoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

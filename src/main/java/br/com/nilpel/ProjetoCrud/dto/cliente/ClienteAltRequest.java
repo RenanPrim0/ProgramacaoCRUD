@@ -1,4 +1,4 @@
-package br.com.nilpel.ProjetoCrud.dto.Cliente;
+package br.com.nilpel.ProjetoCrud.dto.cliente;
 
 public record ClienteAltRequest(
     String nome,

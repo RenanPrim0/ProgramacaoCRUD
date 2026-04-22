@@ -1,4 +1,4 @@
-package br.com.nilpel.ProjetoCrud.dto.Moto;
+package br.com.nilpel.ProjetoCrud.dto.moto;
 
 public record MotoRequest(
         String marca,

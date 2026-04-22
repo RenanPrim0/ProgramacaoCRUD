@@ -1,4 +1,4 @@
-package br.com.nilpel.ProjetoCrud.dto.Mecanico;
+package br.com.nilpel.ProjetoCrud.dto.mecanico;
 
 public record MecanicoResponse(
     Long id,

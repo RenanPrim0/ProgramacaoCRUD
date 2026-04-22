@@ -1,13 +1,13 @@
-package br.com.nilpel.ProjetoCrud.Service;
+package br.com.nilpel.ProjetoCrud.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import br.com.nilpel.ProjetoCrud.Model.Cliente;
-import br.com.nilpel.ProjetoCrud.Repository.ClienteRepository;
-import br.com.nilpel.ProjetoCrud.dto.Cliente.ClienteRequest;
+import br.com.nilpel.ProjetoCrud.model.Cliente;
+import br.com.nilpel.ProjetoCrud.repository.ClienteRepository;
+import br.com.nilpel.ProjetoCrud.dto.cliente.ClienteRequest;
 
 @Service
 public class ClienteService {

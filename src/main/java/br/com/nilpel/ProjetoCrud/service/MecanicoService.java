@@ -1,4 +1,4 @@
-package br.com.nilpel.ProjetoCrud.Service;
+package br.com.nilpel.ProjetoCrud.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.nilpel.ProjetoCrud.Model.Mecanico;
-import br.com.nilpel.ProjetoCrud.Repository.MecanicoRepository;
-import br.com.nilpel.ProjetoCrud.dto.Mecanico.MecanicoResquest;
+import br.com.nilpel.ProjetoCrud.model.Mecanico;
+import br.com.nilpel.ProjetoCrud.repository.MecanicoRepository;
+import br.com.nilpel.ProjetoCrud.dto.mecanico.MecanicoResquest;
 
 @Service
 public class MecanicoService {

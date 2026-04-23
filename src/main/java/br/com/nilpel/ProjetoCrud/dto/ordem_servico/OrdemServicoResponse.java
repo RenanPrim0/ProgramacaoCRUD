@@ -19,6 +19,5 @@ public record OrdemServicoResponse (
         Double valor,
         String status
 
-
         ) {
 }

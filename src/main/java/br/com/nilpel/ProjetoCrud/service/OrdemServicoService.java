@@ -1,5 +1,6 @@
 package br.com.nilpel.ProjetoCrud.service;
 
+import br.com.nilpel.ProjetoCrud.enums.StatusOS;
 import br.com.nilpel.ProjetoCrud.model.Cliente;
 import br.com.nilpel.ProjetoCrud.model.Mecanico;
 import br.com.nilpel.ProjetoCrud.model.Moto;
@@ -47,7 +48,7 @@ public class OrdemServicoService {
         os.setValor(valor);
         os.setDataAbertura(LocalDateTime.now());
         os.setDataFechamento(LocalDateTime.now());
-        os.setStatus(StatusOs.ABERTA);
+        os.setStatus(StatusOS.ABERTA);
 
         return ordemServicoRepository.save(os);
     }
@@ -55,12 +56,10 @@ public class OrdemServicoService {
         return ordemServicoRepository.findAll();
     }
 
-    // READ - por ID
     public Optional<OrdemServico> buscarPorId(Long id) {
         return ordemServicoRepository.findById(id);
     }
 
-    // UPDATE - status
     public OrdemServico atualizarStatus(Long id, StatusOS status) {
         OrdemServico os = ordemServicoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("OS não encontrada com id: " + id));
@@ -73,11 +72,10 @@ public class OrdemServicoService {
 
         return ordemServicoRepository.save(os);
     }
-
-    // DELETE
     public void deletar(Long id) {
         if (!ordemServicoRepository.existsById(id)) {
             throw new RuntimeException("OS não encontrada com id: " + id);
         }
         ordemServicoRepository.deleteById(id);
+    }
 }

@@ -1,6 +1,6 @@
 package br.com.nilpel.ProjetoCrud.model;
 
-
+import br.com.nilpel.ProjetoCrud.enums.StatusOS;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

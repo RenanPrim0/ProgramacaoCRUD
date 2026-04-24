@@ -1,5 +1,6 @@
 package br.com.nilpel.ProjetoCrud.service;
 
+import br.com.nilpel.ProjetoCrud.dto.ordem_servico.OrdemServicoResponse;
 import br.com.nilpel.ProjetoCrud.enums.StatusOS;
 import br.com.nilpel.ProjetoCrud.model.Cliente;
 import br.com.nilpel.ProjetoCrud.model.Mecanico;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class OrdemServicoService {
@@ -30,7 +30,8 @@ public class OrdemServicoService {
     @Autowired
     private MecanicoRepository mecanicoRepository;
 
-    public OrdemServico salvar(Long clienteId, Long motoId, List<Long> mecanicosIds, String descricao, Double valor) {
+    public OrdemServicoResponse salvar(Long clienteId, Long motoId, List<Long> mecanicosIds, String descricao,
+                                  Double valor) {
         Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
         Moto moto = motoRepository.findById(motoId).orElseThrow(() -> new RuntimeException("Moto não encontrada"));
@@ -50,17 +51,20 @@ public class OrdemServicoService {
         os.setDataFechamento(LocalDateTime.now());
         os.setStatus(StatusOS.ABERTA);
 
-        return ordemServicoRepository.save(os);
+        ordemServicoRepository.save(os);
+        return new OrdemServicoResponse(os);
     }
-    public List<OrdemServico> listarTodos() {
-        return ordemServicoRepository.findAll();
-    }
-
-    public Optional<OrdemServico> buscarPorId(Long id) {
-        return ordemServicoRepository.findById(id);
+    public List<OrdemServicoResponse> listarTodos() {
+        return ordemServicoRepository.findAll().stream().map(OrdemServicoResponse::new).toList();
     }
 
-    public OrdemServico atualizarStatus(Long id, StatusOS status) {
+    public OrdemServicoResponse buscarPorId(Long id) {
+        OrdemServico os = ordemServicoRepository.findById(id).orElseThrow(() -> new RuntimeException("OS não " +
+                "encontrada com id: " + id));
+        return new OrdemServicoResponse(os);
+    }
+
+    public OrdemServicoResponse atualizarStatus(Long id, StatusOS status) {
         OrdemServico os = ordemServicoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("OS não encontrada com id: " + id));
 
@@ -70,7 +74,8 @@ public class OrdemServicoService {
             os.setDataFechamento(LocalDateTime.now());
         }
 
-        return ordemServicoRepository.save(os);
+        ordemServicoRepository.save(os);
+        return new OrdemServicoResponse(os);
     }
     public void deletar(Long id) {
         if (!ordemServicoRepository.existsById(id)) {

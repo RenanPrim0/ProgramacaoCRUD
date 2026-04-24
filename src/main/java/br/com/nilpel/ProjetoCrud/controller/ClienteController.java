@@ -19,31 +19,22 @@ public class ClienteController {
 
     @PostMapping("/cadastrar")
     public ResponseEntity<ClienteResponse> criar(@RequestBody ClienteRequest request) {
-        Cliente salvo = clienteService.salvar(request);
-        return ResponseEntity.ok(toResponse(salvo));
+        return ResponseEntity.ok(clienteService.salvar(request));
     }
 
     @GetMapping("/listar")
     public ResponseEntity<List<ClienteResponse>> listarTodos() {
-        List<ClienteResponse> clientes = clienteService.listarTodos()
-                .stream()
-                .map(this::toResponse)
-                .toList();
-
-        return ResponseEntity.ok(clientes);
+        return ResponseEntity.ok(clienteService.listarTodos());
     }
 
     @GetMapping("{id}")
     public ResponseEntity<ClienteResponse> buscarPorId(@PathVariable Long id) {
-        return clienteService.buscarPorId(id)
-                .map(cliente -> ResponseEntity.ok(toResponse(cliente)))
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(clienteService.buscarPorId(id));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<ClienteResponse> atualizar(@PathVariable Long id, @RequestBody ClienteRequest request) {
-        Cliente salvo = clienteService.atualizar(id, request);
-        return ResponseEntity.ok(toResponse(salvo));
+        return ResponseEntity.ok(clienteService.atualizar(id, request));
     }
 
     @DeleteMapping("{id}")

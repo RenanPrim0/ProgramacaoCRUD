@@ -3,13 +3,13 @@ package br.com.nilpel.ProjetoCrud.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import br.com.nilpel.ProjetoCrud.model.Mecanico;
 import br.com.nilpel.ProjetoCrud.service.MecanicoService;
 import br.com.nilpel.ProjetoCrud.dto.mecanico.MecanicoResponse;
 import br.com.nilpel.ProjetoCrud.dto.mecanico.MecanicoResquest;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/mecanicos")
@@ -20,31 +20,22 @@ public class MecanicoController {
 
     @PostMapping
     public ResponseEntity<MecanicoResponse> criar(@RequestBody MecanicoResquest request) {
-        Mecanico salvo = mecanicoService.salvar(request);
-        return ResponseEntity.ok(toResponse(salvo));
+        return ResponseEntity.ok(mecanicoService.salvar(request));
     }
 
     @GetMapping
     public ResponseEntity<List<MecanicoResponse>> listarTodos() {
-        List<MecanicoResponse> mecanicos = mecanicoService.listarTodos()
-                .stream()
-                .map(this::toResponse)
-                .toList();
-
-        return ResponseEntity.ok(mecanicos);
+        return ResponseEntity.ok(mecanicoService.listarTodos());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MecanicoResponse> buscarPorId(@PathVariable Long id) {
-        return mecanicoService.buscarPorId(id)
-                .map(mecanico -> ResponseEntity.ok(toResponse(mecanico)))
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(mecanicoService.buscarPorId(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<MecanicoResponse> atualizar(@PathVariable Long id, @RequestBody MecanicoResquest request) {
-        Mecanico salvo = mecanicoService.atualizar(id, request);
-        return ResponseEntity.ok(toResponse(salvo));
+        return ResponseEntity.ok(mecanicoService.atualizar(id, request));
     }
 
     @DeleteMapping("/{id}")

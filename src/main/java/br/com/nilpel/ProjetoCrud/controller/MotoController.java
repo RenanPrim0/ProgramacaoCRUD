@@ -19,31 +19,22 @@ public class MotoController {
 
     @PostMapping
     public ResponseEntity<MotoResponse> criar(@RequestBody MotoRequest request) {
-        Moto salvo = motoService.salvar(request);
-        return ResponseEntity.ok(toResponse(salvo));
+        return ResponseEntity.ok(motoService.salvar(request));
     }
 
     @GetMapping
     public ResponseEntity<List<MotoResponse>> listarTodos() {
-        List<MotoResponse> motos = motoService.listarTodos()
-                .stream()
-                .map(this::toResponse)
-                .toList();
-
-        return ResponseEntity.ok(motos);
+        return ResponseEntity.ok(motoService.listarTodos());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MotoResponse> buscarPorId(@PathVariable Long id) {
-        return motoService.buscarPorId(id)
-                .map(moto -> ResponseEntity.ok(toResponse(moto)))
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(motoService.buscarPorId(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<MotoResponse> atualizar(@PathVariable Long id, @RequestBody MotoRequest request) {
-        Moto salva = motoService.atualizar(id, request);
-        return ResponseEntity.ok(toResponse(salva));
+        return ResponseEntity.ok(motoService.atualizar(id, request));
     }
 
     @DeleteMapping("/{id}")

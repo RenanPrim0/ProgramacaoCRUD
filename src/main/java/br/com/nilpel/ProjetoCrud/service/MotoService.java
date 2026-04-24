@@ -1,12 +1,12 @@
 package br.com.nilpel.ProjetoCrud.service;
 
+import br.com.nilpel.ProjetoCrud.dto.moto.MotoResponse;
 import br.com.nilpel.ProjetoCrud.model.Moto;
 import br.com.nilpel.ProjetoCrud.repository.MotoRepository;
 import br.com.nilpel.ProjetoCrud.dto.moto.MotoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MotoService {
@@ -15,7 +15,7 @@ public class MotoService {
     private MotoRepository motoRepository;
 
 
-    public Moto salvar(MotoRequest request) {
+    public MotoResponse salvar(MotoRequest request) {
 
         Moto moto = new Moto();
         moto.setMarca(request.marca());
@@ -23,19 +23,21 @@ public class MotoService {
         moto.setAno(request.ano());
         moto.setCor(request.cor());
         moto.setPlaca(request.placa());
-        return motoRepository.save(moto);
+        motoRepository.save(moto);
+        return new MotoResponse(moto);
     }
 
-    public List<Moto> listarTodos() {
-        return motoRepository.findAll();
+    public List<MotoResponse> listarTodos() {
+        return motoRepository.findAll().stream().map(MotoResponse::new).toList();
     }
 
-    public Optional<Moto> buscarPorId(Long id) {
-        return motoRepository.findById(id);
+    public MotoResponse buscarPorId(Long id) {
+        Moto moto = motoRepository.findById(id).orElseThrow(() -> new RuntimeException("Moto não encontrada com id: " + id));
+        return new MotoResponse(moto);
     }
 
 
-    public Moto atualizar(Long id, MotoRequest request) {
+    public MotoResponse atualizar(Long id, MotoRequest request) {
         Moto moto = motoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Moto não encontrada com id: " + id));
 
@@ -45,7 +47,8 @@ public class MotoService {
         moto.setCor(request.cor());
         moto.setPlaca(request.placa());
 
-        return motoRepository.save(moto);
+        motoRepository.save(moto);
+        return new MotoResponse(moto);
     }
 
     public void deletar(Long id) {

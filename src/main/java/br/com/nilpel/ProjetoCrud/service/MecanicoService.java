@@ -3,6 +3,7 @@ package br.com.nilpel.ProjetoCrud.service;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.nilpel.ProjetoCrud.dto.mecanico.MecanicoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,23 +16,25 @@ public class MecanicoService {
     @Autowired
     private MecanicoRepository mecanicoRepository;
 
-    public Mecanico salvar(MecanicoResquest request) {
+    public MecanicoResponse salvar(MecanicoResquest request) {
         Mecanico mecanico = new Mecanico();
         mecanico.setNome(request.nome());
         mecanico.setTelefone(request.telefone());
         mecanico.setCpf(request.cpf());
-        return mecanicoRepository.save(mecanico);
+        mecanicoRepository.save(mecanico);
+        return new MecanicoResponse(mecanico);
     }
 
-    public List<Mecanico> listarTodos() {
-        return mecanicoRepository.findAll();
+    public List<MecanicoResponse> listarTodos() {
+        return mecanicoRepository.findAll().stream().map(MecanicoResponse::new).toList();
     }
 
-    public Optional<Mecanico> buscarPorId(Long id) {
-        return mecanicoRepository.findById(id);
+    public MecanicoResponse buscarPorId(Long id) {
+        Mecanico mecanico = mecanicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Mecânico não encontrado com id: " + id));
+        return new MecanicoResponse(mecanico);
     }
 
-    public Mecanico atualizar(Long id, MecanicoResquest request) {
+    public MecanicoResponse atualizar(Long id, MecanicoResquest request) {
         Mecanico mecanico = mecanicoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Mecânico não encontrado com id: " + id));
 
@@ -39,7 +42,8 @@ public class MecanicoService {
         mecanico.setTelefone(request.telefone());
         mecanico.setCpf(request.cpf());
 
-        return mecanicoRepository.save(mecanico);
+        mecanicoRepository.save(mecanico);
+        return new MecanicoResponse(mecanico);
     }
 
     public void deletar(Long id) {

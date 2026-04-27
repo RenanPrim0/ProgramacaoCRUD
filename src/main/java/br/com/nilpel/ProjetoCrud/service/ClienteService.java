@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.nilpel.ProjetoCrud.model.Cliente;
 import br.com.nilpel.ProjetoCrud.repository.ClienteRepository;
+import br.com.nilpel.ProjetoCrud.dto.cliente.ClienteAltRequest;
 import br.com.nilpel.ProjetoCrud.dto.cliente.ClienteRequest;
 
 @Service
@@ -37,9 +38,9 @@ public class ClienteService {
         return new ClienteResponse(cliente);
     }
 
-    public ClienteResponse atualizar(Long id, ClienteRequest request) {
-        Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado com id: " + id));
+    public ClienteResponse atualizar(ClienteAltRequest request) {
+        Cliente cliente = clienteRepository.findById(request.id())
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado com id: " + request.id()));
 
         cliente.setNome(request.nome());
         cliente.setEmail(request.email());

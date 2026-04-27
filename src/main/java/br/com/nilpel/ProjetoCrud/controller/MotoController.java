@@ -1,7 +1,8 @@
 package br.com.nilpel.ProjetoCrud.controller;
 
-import br.com.nilpel.ProjetoCrud.model.Moto;
+
 import br.com.nilpel.ProjetoCrud.service.MotoService;
+import br.com.nilpel.ProjetoCrud.dto.moto.MotoAltRequest;
 import br.com.nilpel.ProjetoCrud.dto.moto.MotoRequest;
 import br.com.nilpel.ProjetoCrud.dto.moto.MotoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,12 @@ public class MotoController {
     @Autowired
     private MotoService motoService;
 
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<MotoResponse> criar(@RequestBody MotoRequest request) {
         return ResponseEntity.ok(motoService.salvar(request));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<MotoResponse>> listarTodos() {
         return ResponseEntity.ok(motoService.listarTodos());
     }
@@ -32,25 +33,14 @@ public class MotoController {
         return ResponseEntity.ok(motoService.buscarPorId(id));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<MotoResponse> atualizar(@PathVariable Long id, @RequestBody MotoRequest request) {
-        return ResponseEntity.ok(motoService.atualizar(id, request));
+    @PutMapping("/alterar")
+    public ResponseEntity<MotoResponse> atualizar(@RequestBody MotoAltRequest request) {
+        return ResponseEntity.ok(motoService.atualizar(request));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         motoService.deletar(id);
         return ResponseEntity.noContent().build();
-    }
-
-    private MotoResponse toResponse(Moto moto) {
-        return new MotoResponse(
-                moto.getId(),
-                moto.getMarca(),
-                moto.getModelo(),
-                moto.getAno(),
-                moto.getCor(),
-                moto.getPlaca()
-        );
     }
 }

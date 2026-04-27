@@ -3,6 +3,7 @@ package br.com.nilpel.ProjetoCrud.service;
 import br.com.nilpel.ProjetoCrud.dto.moto.MotoResponse;
 import br.com.nilpel.ProjetoCrud.model.Moto;
 import br.com.nilpel.ProjetoCrud.repository.MotoRepository;
+import br.com.nilpel.ProjetoCrud.dto.moto.MotoAltRequest;
 import br.com.nilpel.ProjetoCrud.dto.moto.MotoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,9 +38,9 @@ public class MotoService {
     }
 
 
-    public MotoResponse atualizar(Long id, MotoRequest request) {
-        Moto moto = motoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Moto não encontrada com id: " + id));
+    public MotoResponse atualizar(MotoAltRequest request) {
+        Moto moto = motoRepository.findById(request.id())
+                .orElseThrow(() -> new RuntimeException("Moto não encontrada com id: " + request.id()));
 
         moto.setMarca(request.marca());
         moto.setModelo(request.modelo());

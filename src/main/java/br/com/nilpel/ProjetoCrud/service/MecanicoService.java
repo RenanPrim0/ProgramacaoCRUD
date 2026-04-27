@@ -1,12 +1,11 @@
 package br.com.nilpel.ProjetoCrud.service;
 
 import java.util.List;
-import java.util.Optional;
 
+import br.com.nilpel.ProjetoCrud.dto.mecanico.MecanicoAltResquest;
 import br.com.nilpel.ProjetoCrud.dto.mecanico.MecanicoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.com.nilpel.ProjetoCrud.model.Mecanico;
 import br.com.nilpel.ProjetoCrud.repository.MecanicoRepository;
 import br.com.nilpel.ProjetoCrud.dto.mecanico.MecanicoResquest;
@@ -34,9 +33,9 @@ public class MecanicoService {
         return new MecanicoResponse(mecanico);
     }
 
-    public MecanicoResponse atualizar(Long id, MecanicoResquest request) {
-        Mecanico mecanico = mecanicoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mecânico não encontrado com id: " + id));
+    public MecanicoResponse atualizar(MecanicoAltResquest request) {
+        Mecanico mecanico = mecanicoRepository.findById(request.id())
+                .orElseThrow(() -> new RuntimeException("Mecânico não encontrado com id: " + request.id()));
 
         mecanico.setNome(request.nome());
         mecanico.setTelefone(request.telefone());

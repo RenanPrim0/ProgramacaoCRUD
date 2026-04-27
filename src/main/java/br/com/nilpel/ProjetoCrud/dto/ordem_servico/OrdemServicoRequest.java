@@ -2,7 +2,6 @@ package br.com.nilpel.ProjetoCrud.dto.ordem_servico;
 
 import br.com.nilpel.ProjetoCrud.enums.StatusOS;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public record OrdemServicoRequest (

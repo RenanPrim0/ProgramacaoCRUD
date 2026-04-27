@@ -3,11 +3,7 @@ package br.com.nilpel.ProjetoCrud.dto.ordem_servico;
 import br.com.nilpel.ProjetoCrud.dto.cliente.ClienteResponse;
 import br.com.nilpel.ProjetoCrud.dto.mecanico.MecanicoResponse;
 import br.com.nilpel.ProjetoCrud.dto.moto.MotoResponse;
-import br.com.nilpel.ProjetoCrud.model.Cliente;
-import br.com.nilpel.ProjetoCrud.model.Mecanico;
-import br.com.nilpel.ProjetoCrud.model.Moto;
 import br.com.nilpel.ProjetoCrud.model.OrdemServico;
-
 import java.time.LocalDateTime;
 import java.util.List;
 

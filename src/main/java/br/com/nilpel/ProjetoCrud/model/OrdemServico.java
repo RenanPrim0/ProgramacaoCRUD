@@ -33,6 +33,7 @@ public class OrdemServico {
             joinColumns = @JoinColumn(name = "os_id"),
             inverseJoinColumns = @JoinColumn(name = "mecanico_id")
     )
+
     private List<Mecanico> mecanicos;
     private LocalDateTime dataAbertura;
     private LocalDateTime dataFechamento;

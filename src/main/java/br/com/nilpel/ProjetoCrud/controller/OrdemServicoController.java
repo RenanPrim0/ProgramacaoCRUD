@@ -4,6 +4,7 @@ import br.com.nilpel.ProjetoCrud.dto.ordem_servico.OrdemServicoRequest;
 import br.com.nilpel.ProjetoCrud.dto.ordem_servico.OrdemServicoResponse;
 import br.com.nilpel.ProjetoCrud.enums.StatusOS;
 import br.com.nilpel.ProjetoCrud.service.OrdemServicoService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class OrdemServicoController {
     @Autowired
     private OrdemServicoService ordemServicoService;
 
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<OrdemServicoResponse> criar(@RequestBody OrdemServicoRequest request) {
         return ResponseEntity.ok(ordemServicoService.salvar(
                 request.clienteId(),
@@ -23,7 +24,13 @@ public class OrdemServicoController {
                 request.mecanicosId(),
                 request.descricao(),
                 request.valor()
-        ));
+                )
+        );
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<OrdemServicoResponse>> listarTodos() {
+        return ResponseEntity.ok(ordemServicoService.listarTodos());
     }
 
     @GetMapping("/{id}")

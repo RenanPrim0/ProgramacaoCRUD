@@ -1,8 +1,8 @@
 package br.com.nilpel.ProjetoCrud.controller;
 
+import br.com.nilpel.ProjetoCrud.dto.ordem_servico.OrdemServicoAttRequest;
 import br.com.nilpel.ProjetoCrud.dto.ordem_servico.OrdemServicoRequest;
 import br.com.nilpel.ProjetoCrud.dto.ordem_servico.OrdemServicoResponse;
-import br.com.nilpel.ProjetoCrud.enums.StatusOS;
 import br.com.nilpel.ProjetoCrud.service.OrdemServicoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping ("/ordem_servico")
+@RequestMapping ("/ordem-servico")
 public class OrdemServicoController {
 
     @Autowired
@@ -38,9 +38,14 @@ public class OrdemServicoController {
         return ResponseEntity.ok(ordemServicoService.buscarPorId(id));
     }
 
-    @PatchMapping("/{id}/status")
-    public ResponseEntity<OrdemServicoResponse> atualizarStatus(@PathVariable Long id, @RequestParam StatusOS status) {
-        return ResponseEntity.ok(ordemServicoService.atualizarStatus(id, status));
+    @PatchMapping("/alterar/status")
+    public ResponseEntity<OrdemServicoResponse> atualizarStatus(@RequestBody OrdemServicoAttRequest request) {
+        return ResponseEntity.ok(ordemServicoService.atualizarStatus(request));
+    }
+
+    @PatchMapping("/alterar/descricao")
+    public ResponseEntity<OrdemServicoResponse> atualizarDescricao(@RequestBody OrdemServicoAttRequest request) {
+        return ResponseEntity.ok(ordemServicoService.atualizarDescricao(request.id(), request.descricao(), request.motoId(), request.clienteId(), request.mecanicosId()));
     }
 
     @DeleteMapping("/{id}")

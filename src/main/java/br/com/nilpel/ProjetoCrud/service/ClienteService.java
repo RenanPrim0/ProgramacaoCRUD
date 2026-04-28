@@ -1,7 +1,6 @@
 package br.com.nilpel.ProjetoCrud.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import br.com.nilpel.ProjetoCrud.dto.cliente.ClienteResponse;
 import org.springframework.beans.factory.annotation.Autowired;

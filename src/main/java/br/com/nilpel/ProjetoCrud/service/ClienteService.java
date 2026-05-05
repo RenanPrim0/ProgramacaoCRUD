@@ -3,6 +3,8 @@ package br.com.nilpel.ProjetoCrud.service;
 import java.util.List;
 
 import br.com.nilpel.ProjetoCrud.dto.cliente.ClienteResponse;
+import br.com.nilpel.ProjetoCrud.exceptions.ClienteException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.nilpel.ProjetoCrud.model.Cliente;
@@ -17,6 +19,15 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
 
     public ClienteResponse salvar(ClienteRequest request) {
+
+        try {
+            Cliente clienteCadastrado = clienteRepository.findByCpf(request.cpf());
+
+
+        if(clienteCadastrado != null){
+            throw new ClienteException("Já existe um cliente cadastrado com esse CPF.");
+        }
+
         Cliente cliente = new Cliente();
         cliente.setNome(request.nome());
         cliente.setEmail(request.email());
@@ -25,6 +36,9 @@ public class ClienteService {
         cliente.setCpf(request.cpf());
         clienteRepository.save(cliente);
         return new ClienteResponse(cliente);
+        } catch (Exception e) {
+            throw new ClienteException("Ocorreu um erro ao cadastrar o cliente: " + e.getMessage());
+        }
     }
 
     public List<ClienteResponse> listarTodos() {

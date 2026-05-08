@@ -10,13 +10,13 @@ import br.com.nilpel.ProjetoCrud.dto.mecanico.MecanicoResquest;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mecanicos")
+@RequestMapping("/mecanico")
 public class MecanicoController {
 
     @Autowired
     private MecanicoService mecanicoService;
 
-    @PostMapping("/criar")
+    @PostMapping("/cadastrar")
     public ResponseEntity<MecanicoResponse> criar(@RequestBody MecanicoResquest request) {
         return ResponseEntity.ok(mecanicoService.salvar(request));
     }

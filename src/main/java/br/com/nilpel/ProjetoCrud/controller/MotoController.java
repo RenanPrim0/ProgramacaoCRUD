@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/motos")
+@RequestMapping("/moto")
 public class MotoController {
 
     @Autowired
     private MotoService motoService;
 
-    @PostMapping("/criar")
+    @PostMapping("/cadastrar")
     public ResponseEntity<MotoResponse> criar(@RequestBody MotoRequest request) {
         return ResponseEntity.ok(motoService.salvar(request));
     }

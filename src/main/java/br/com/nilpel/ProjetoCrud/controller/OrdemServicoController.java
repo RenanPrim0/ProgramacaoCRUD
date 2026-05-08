@@ -16,7 +16,7 @@ public class OrdemServicoController {
     @Autowired
     private OrdemServicoService ordemServicoService;
 
-    @PostMapping("/criar")
+    @PostMapping("/cadastrar")
     public ResponseEntity<OrdemServicoResponse> criar(@RequestBody OrdemServicoRequest request) {
         return ResponseEntity.ok(ordemServicoService.salvar(
                 request.clienteId(),
